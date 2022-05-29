@@ -1,0 +1,769 @@
+Minha lista de codigos e catálogo de conhecimentos por Vinicius Alvino de Araújo:
+
+O 'Lightning Experience' utiliza componentes 'Aura', e 'Lightning Web Components''(LWC)'. Esse seria o lado cliente.
+Visualforce, 'aura' e 'LWC' são 'tecnologias criadas pela própria empresa'.
+
+temos o lado de 'processamento e informações armazenadas', no 'Salesforce' tempos a 'linguagem de programação da própria'
+'Salesforce', o 'Apex' que é semelhante ao 'JAVA', e "banco de dados" da 'Salesforce' os "dados armazenados como objetos", e 
+"comandos" baseados na variação de 'SQL', o 'SOQL' e 'SOSL'.
+
+SQL significa 'Standard Query Language', literalmente a "linguagem padrão para realizar queries". A linguagem 'SQL' é
+utilizada de maneira relativamente parecida entre os principais "bancos de dados" relacionais do mercado:
+'Oracle',
+	'MySQL',
+		'MariaDB',
+			'PostgreSQL',
+				'Microsoft SQL Server'. 
+
+'Apex' - "Fundamentos"
+
+A linguagem 'Apex' é uma linguagem semelhante ao 'Java' que permite "adicionar lógicas", "eventos e gatilhos" para
+	manipular dados e registros.
+
+Algumas informações sobre o Apex:
+
+'Hospedado',
+	'Orientado a objetos',
+		'Fortemente tipada',
+			'possui integração ao banco de dados',
+				'focado nos dados',
+					'prático' e 'possui compatibilidade com versões anteriores'. Uma das coisas mais interessantes sobre 
+			'Apex', é que ela é "desenvolvida na nuvem", tem sua compilação e execução nos servidores em nuvem.
+
+
+"https://trailhead.salesforce.com/pt-BR/content/learn/modules/apex_database/apex_database_intro"
+
+O 'Apex' é uma "linguagem orientada a objetos", então ela "implementa" os "principais conceitos" da mesma,
+	'como',
+	'classe',
+	'atributos',
+	'métodos' e 'objetos'.
+
+Haverá parte específica sobre esses conceitos
+	Iremos focar nos fundamentos da linguagem.
+
+************************************************************************************************************************************************************
+Imprimindo texto no system.debug:
+
+system.debug('E Ai Essa Galera! ~!@#$%^&*()_+/*`1234567890-=:"<>?/;][}{|');
+system.debug('\' Um texto entre/com aspas e com quebra de linha\'\n_________\n_________');
+
+fundamentos
+	
+	'variaveis'
+		uma 'variável' pode assumir "diferentes valores", porém ela "só pode armazenar um valor a cada instante"
+		é preciso "definir" um "tipo de dados" a esta 'variável'. 
+			a mesma "é fortemente tipada". No 'Apex', devemos dizer "qual o tipo de informação será armazenada",
+			o 'nome' da 'variável' e "definir o valor atribuído a ela"
+
+************************************************************************************************************************************************************				
+				Tipos de Dados Primitivos
+
+O Apex tem suporte aos tipos de dados:
+	'Boolean' 	- "armazena" valores lógicos como "true" e "false"
+ex:
+		boolean StatusProduto = true;
+			system.debug(StatusProduto);
+
+		boolean StatusProduto = false;
+			system.debug(StatusProduto);
+
+
+	'String' 	- "armazena" uma cadeia de "caracteres"
+		A "classe" String é uma "classe" responsável por realizar ações com cadeias de "caracteres".
+			Ela possui um conjunto de funções para trabalhar e manipular strings e substrings.
+			Vamos conhecer algumas:
+ex:
+		string NomeDoProduto = ('Cajuina São Geraldo');
+			system.debug(NomeDoProduto);
+
+//obs:	numeros e simbolos podem ser escritos, mas não possuem valor de grandeza (5<10 , 10<50, 50>49, 49>48, 50==50, 10==10)
+			servem apenas como um caracter de texto (o mesmo serve para simbolos e operadores).
+		
+		string NomeDoDroide = ('R2D2','R4-P17', 'C3PO', 'BB8');
+			system.debug(NomeDoDroide);
+			
+
+"Capitalize" - função que coloca a primeira letra da string em caixa alta.
+
+string txt = 'tava bebendo no inferno, o cão foi quem botou pra noiz beber...';
+	system.debug('Tava bebendo onde Jeremias? ' + txt); //Primeira letra da variavel txt com letra minuscula
+	system.debug('Tava bebendo onde Jeremias? ' + txt.capitalize()); //Primeira letra da variavel txt com letra maiuscula
+
+"Contains" - verifica se possui a ocorrência de uma substring, caso possua retorna true, senão false.
+
+string txt = 'tava bebendo no inferno, o cão foi quem botou pra noiz beber...';
+	system.debug('Possui beber?\n Resultado: ' + txt.Contains('beber'));
+
+"UpperCase" - transforma a string em caixa alta.
+
+string txt = 'tava bebendo no inferno, o cão foi quem botou pra noiz beber...';
+	system.debug('Tava bebendo onde Jeremias? \n' + txt.ToUpperCase()); 
+
+"LowerCase" - transforma a string em caixa baixa.
+
+string txt = 'TAVA BEBENDO NO INFERNO, O CÃO FOI QUEM BOTOU PRA NOIZ BEBER...';
+	system.debug('Tava bebendo onde Jeremias? \n' + txt.ToLowerCase()); 
+
+"Equals" - verifica se uma String é "igual a outra" String, "retornando" true e false.
+
+string txt = 'tava bebendo no inferno, o cão foi quem botou pra noiz beber...';
+	system.debug('Tava bebendo no céu? : '+ txt.equals('céu'));
+	system.debug('Tava bebendo no inferno? : '+ txt.equals('tava bebendo no inferno, o cão foi quem botou pra noiz beber...'));
+
+"Remove" - remove um trecho pré determinado da String desejada.
+
+string txt = 'tava bebendo no inferno, o cão foi quem botou pra noiz beber...';
+	system.debug('Removendo inferno : '+ txt.remove('no inferno'));
+	
+"Replace" - procura uma substring alvo,ao encontrar realiza a troca por uma nova substring.
+Essa função necessita de 2 parâmetros (alvo, novaString).
+
+string txt = 'tava bebendo no inferno, o cão foi quem botou pra noiz beber...';
+	system.debug('Tava bebendo onde Jeremias? \n' + txt.replace('tava bebendo no inferno', 'tava tomando doce com jeusus'));
+
+"Split" - retorna uma lista (array) com os valores separados por uma ocorrência determinada
+
+string txt = 'tava bebendo no inferno, o cão foi quem botou pra noiz beber...';
+	system.debug(txt.Split(' ')); // Vai sair colocando virgula onde tiver um espaço en branco (listando cada palavra como um item)
+
+"Sequências de escape de caracteres"
+	As 'aspas' são usadas para "determinar o conteúdo" de uma String. Porém, e se quisermos utilizar aspas dentro da String?
+
+Exemplo, ‘Eu ‘gosto’ de beber, sou muito ‘bom’’.
+
+"Não podemos" utilizar as 'aspas' da forma que está no exemplo, mas podemos usar o "escape de caracteres", nesse caso, a "barra" invertida "( \ )".
+	'Usamos antes de cada aspas' dentro da String.
+		Logo, ficaria assim: 'Eu \'gosto\' de beber, sou muito \'bom\''.
+system.debug ('Eu \'gosto\' de beber, sou muito \'bom\'');
+
+	Podemos usar outras formas de escape:
+
+		\n - quebra de linha
+			system.debug ('Eu \ngosto\n de beber, sou muito \nbom\n');
+
+		\t - tab
+			system.debug ('Eu \tgosto\t de beber, sou muito \tbom\t');
+
+		\b - um espaço
+			system.debug ('Eu \bgosto\b de beber, sou muito \bbom\b');
+
+		\\ - colocar barra invertida
+			system.debug ('Eu \\gosto\\ de beber, sou muito \\bom\\');
+
+	Comentários
+		Podemos criar comentários dentro do nossos códigos de duas maneiras:
+
+			// - comentário de uma única linha
+
+			/* */ - comentário de limite, /* inicio do comentário e */ fim do comentário.
+
+
+
+'Integer' 	- "armazena" "números inteiros" com tamanho de 32 bits
+	integer Alfa = 1;
+		system.debug(alfa);
+
+	integer Bravo = 2;
+		system.debug(Bravo);
+
+//obs	Podemos criar variaveis que são resultado de operações entre outras variaveis:
+	integer AlfaBravo = Alfa+Bravo;
+		system.debug(Alfa+Bravo);
+
+//obs é possivel debugar numero com textos (mantendo os caracteres de texto dentro de aspas siples 'abcd')
+	system.debug('Valor de Alfa: '+ Alfa);	
+		system.debug('Valor de Bravo: '+ Bravo);
+			system.debug('Soma de Alfa com Bravo: '+ AlfaBravo);
+
+//obs numeros podem ser concatenados como texto, usando a seguinte lógica:
+	system.debug('Concatenação de Alfa com Bravo: '+Alfa+Bravo);
+
+
+Operadores
+	Os operadores são meios pelo qual incrementamos, decrementamos, comparamos e avaliamos dados dentro do computador,
+	realizamos atribuição e cálculo com os valores das variáveis.
+
+São eles:
+
+	=	atribuição
+
+	+	adição
+
+	-	subtração
+
+	*	multiplicação
+
+	/	divisão
+
+	++	incremento
+		a++ usa o valor e depois acrescenta um //soma depois exibe
+
+			integer Alfa = 10;
+				system.debug(Alfa);		//mostra 10
+				system.debug(Alfa++); 	//mostra 11 (10 depois + 1)
+				system.debug(Alfa++);	//mostra 12 (11 depois + 1)
+				system.debug(Alfa);		//mostra 12
+
+		++a acrescenta um depois usa o valor // soma antes de exibir
+
+			integer Alfa = 10;
+				system.debug(Alfa); 		//mostra 10
+				system.debug(++Alfa);	//+1 depois mostra 11
+				system.debug(++Alfa);	//+1 depois mostra 12
+				system.debug(Alfa);		//mostra 12
+
+
+	--	decremento
+
+		a-- usa o valor e depois subtrai um
+
+			integer Alfa = 10;
+				system.debug(Alfa);		//mostra 10
+				system.debug(Alfa--); 	//mostra 9 (10 depois - 1)
+				system.debug(Alfa--);	//mostra 8 (9 depois - 1)
+				system.debug(Alfa);		//mostra 8
+
+		--a subtrai um e usa o valor
+
+			integer Alfa = 10;
+				system.debug(Alfa); 		//mostra 10
+				system.debug(--Alfa);	//-1 depois mostra 9
+				system.debug(--Alfa);	//-1 depois mostra 8
+				system.debug(Alfa);		//mostra 8
+
+	+=	atribuição de adição
+
+	-=	atribuição de subtração
+
+	*=	atribuição de multiplicação
+
+	/=	atribuição de divisão
+
+	==	igualdade
+
+	!=	diferença
+
+	<	menor
+
+	>	maior
+
+	<=	menor e igual
+
+	>=	maior e igual
+
+	!	não
+
+	&&	e
+
+	||	ou
+
+"Operador ternário"
+	O operador ternário 'realiza um teste' de uma condição que "retorna um valor" se true e outro se for false.
+	Ele possui a seguinte estrutura: condição ? retornoTrue : retornoFalse.
+
+	integer Bravo = 10;
+		integer teste1 = 8;
+		integer teste2 = 11;
+		string maior = teste1 >= 10 ? 'MAIOR OU IGUAL':'MENOR OU IGUAL';	
+			system.debug('Teste de variavel é: '+maior);	// retorna false (MENOR OU IGUAL)
+	
+		string menor = teste2 >= 10 ? 'MAIOR OU IGUAL':'MENOR OU IGUAL';	
+			system.debug('Teste de variavel é: '+menor);	// retorna true (MAIOR OU IGUAL)
+
+
+	'Long' 		- "armazena" valores "inteiros" com "tamanho de 64" bits
+//obs mesma logica aplicada ao integer, porem utilizado em numeros muito grandes
+long BigAlfa = 100000000;
+	system.debug(BigAlfa);
+		system.debug('Valor de BigAlfa: '+BigAlfa);
+
+
+	'Decimal'	- "armazena" valores do tipo "real", exemplo, "10.5", com tamanho de 32 bits
+//obs mesma logica aplicada ao integer, porem utilizado em numeros reais
+decimal AlfaReal = 1.11;
+	system.debug(AlfaReal);
+
+decimal BravoReal = 2.22;
+	system.debug(BravoReal);
+
+decimal AlfaRealBravoReal = AlfaReal+BravoReal;
+	system.debug('Soma de AlfaReal e BravoReal: '+ AlfaRealBravoReal);
+
+
+	'Double' 	- "armazena" valores do tipo "real", exemplo, "10.5", com "tamanho de 64" bits
+//obs mesma logica aplicada ao integer, porem utilizado em numeros muito grandes
+Double BigAlfaReal = 111111111.11111111;
+	system.debug(BigAlfaReal);
+		system.debug('Valor de BigAlfaReal: '+BigAlfaReal);
+
+	'Time' 		- "armazena" informações de uma determinada hora.
+time HoraDoPesadelo = time.newInstance(03, 03, 03, 00);
+	system.debug(HoraDoPesadelo);
+		system.debug('A Hora do Pesadelo'+ HoraDoPesadelo);
+
+	'Datetime' 	- "armazena" informações de um determinado "dia e hora"
+date SextaFeira13 = date.newInstance(1980, 12, 01);
+	system.debug(SextaFeira13);
+		system.debug('Sexta Feira 13: '+ SextaFeira13);
+
+//obs: é possivel unir 'data e hora'
+	DateTime NoiteDoTerror = DateTime.newInstance (SextaFeira13, HoraDoPesadelo);
+		system.debug('Noite do Terror: '+ NoiteDoTerror);
+
+
+	'Blob' 		- "armazena" em código binário "alguma informação de escolha", como por exemplo uma "imagem".
+
+	'ID' 		- "armazena" informações "código identificador" do "Lightning Plataform"
+							 que pode conter 15 ou 18 caracteres. Ex: 00300000003T2PGAA0 <=[ID que fica na barra de navegação]
+*************************************************************************************************************************************************
+
+'Apex' - "Estruturas de Fluxo"
+	Iremos entender o funcionamento de estruturas de 'decisão' e de 'repetição'.
+
+"Estruturas de Decisão"
+	Neste tipo de estrutura o 'fluxo' de instruções a ser seguido é 'escolhido em função do resultado da avaliação' de 'uma' ou 'mais condições'.
+	Uma condição é uma 'expressão lógica'.
+
+A 'classificação' das estruturas de decisão é feita 'de acordo com o número de condições' que devem ser testadas "para que se decida qual o caminho a ser seguido".
+Segundo esta 'classificação', têm-se 'dois tipos' de estruturas de decisão:
+
+
+*	If e else
+		Se a condição for verdadeira faça isso, senão faça aquilo. Simples.
+
+		integer Alfa = 10;
+		//integer Alfa = 8; //teste variavel resultado false
+			if(alfa >= 10){
+    			system.debug('Alfa Maior ou igual a 10');
+				}else{
+    				system.debug('Alfa menor que 10');
+}
+
+*	else if
+	Caso exista "mais de uma condição" para o se, podemos utilizar após o if o else if. 'Podemos usar quantas vezes quisermos'.
+	Lembrando que 'o último a ser verificado' "sempre será" o else "apenas".
+		integer Alfa = 10;
+			if(Alfa > 10){ 
+				system.debug('maior que 10');
+				}else if(alfa < 10){
+					system.debug ('menor que 10');
+				}else{
+					system.debug('igual a 10');
+}
+
+* 	"Expressões Lógicas"
+	Expressões lógicas são aquelas cujo 'resultado da avaliação é um valor lógico' "(V ou F)". Os operadores lógicos são "E", "OU" E "NÃO".
+		Nesse caso 'existe mais de uma condição', e a partir delas podemos ter um resultado V ou F.
+
+* 	'Ou', "or" ou "||"
+		"OR": retorna V "se uma" das entradas é V.
+			Regra: uma coisa pode ser verdadeira ou falsa? Sim.
+				integer Alfa = 10;
+				integer Bravo = 20;
+					//se Alfa ou Bravo tiverem valores diferentes de 10 ou 20 respectivamente, etrarão na condição falsa (else)
+				if(Alfa == 10 || Bravo == 20){
+					system.debug('Alfa Ou Bravo corespondem a seus valores');
+				}else{
+					system.debug('Alfa oo Bravo não correspondem a seus valores '); // Alfa || Bravo com valor !=10 || != 20
+				}
+
+*	'E', "and" ou "&&"
+		"AND": retorna V "se ambas" as entradas são V.
+			Regra: uma coisa pode ser verdadeira e falsa? Não.
+
+			integer Alfa = 10;
+			//integer Alfa = 21; // para testar fora do intervalo
+				if(alfa >= 0 && alfa <=20){
+					system.debug('Alfa esta no intervalo de 0 a 20');
+				}else{
+					system.debug('Alfa está fora do intervalo'); //Se Alfa fora da condição
+				}
+************************************************************************************************************************************************************
+
+*	switch
+	Switch-When
+		É uma estrutura de condição que c'om base em uma variável' "realiza testes e execução de comandos".
+		Geralmente através de casos (case em outras linguagens) que são verificados.
+		"Se" "nenhum caso for satisfeito" ele 'executa um comando padrão que pré determinamos'.
+		O switch "não suporta" 'condições estruturadas' como por exemplo, (a < 10).
+
+		integer estrelas = 6;
+			switch on estrelas {
+				when 1{
+					system.debug('1 estrela');
+		}
+	
+				when 2{
+					system.debug('2 estrelas');
+		}
+	
+				when 3{
+					system.debug('3 estrelas');
+		}
+	
+				when 4{
+					system.debug('4 estrelas');
+		}
+	
+				when 5{
+					system.debug('5 estrelas');
+		}
+	
+				when else{
+					system.debug('Fora do intevalo');
+		}
+
+	}
+
+
+	Podemos ter mais de uma condição para cada caso. Exemplo:
+	 ativar um bloco de comando quando for 1 ou 2. Não precisamos montar um when para cada um.
+	 	 integer teste = 1;
+	 	switch on teste{
+			when 1, 2{
+	 			system.debug('1, 2 feijão com arroz');
+	 		}when 3, 4{
+	 			system.debug('3, 4 feijão no prato');
+	 		}when 5, 6{
+	 			system.debug('5, 6 feijão ingles');
+	 		}when 7, 8{
+	 			system.debug('7, 8 comer biscoito');
+	 		}when 9, 10{
+	 			system.debug('9, 10 comer pasteis');
+	 		}
+	 	}
+
+*************************************************************************************************************************************************************
+
+Estrutura de repetição
+	As estruturas de repetição são muitas vezes chamadas de 'Laços' ou, também, de 'Loops'.
+	A classificação das "estruturas de repetição" é feita de acordo com o 'conhecimento prévio' do "número de vezes" que o conjunto de comandos "será executado".
+
+	'Laços Contados' - "For"
+Os laços contados são úteis quando se 'conhece previamente' o 'número de vezes' que se deseja executar um determinado conjunto de comandos.
+Então, este tipo de laço nada mais é que uma estrutura dotada de mecanismos para 'contar o número de vezes' que o corpo do laço
+(ou seja, o comando composto em seu interior) é executado.
+
+	"For"
+Estrutura do for:
+for(/*variaveis iniciais*/; /*condições para repetição*/; /*incremento ou decremento*/){
+	//comando que será repetido
+}
+
+	"Incremento" e "decremento"
+
+	"incremento"
+		Para adicionar +1 no valor de qualquer variável devemos usar das seguintes formas:
+
+			var = var + 1
+			ou
+			var++
+
+		Exemplo: usando loop de repetição, mostra os valores de 1 até 5.
+			for(integer Charlie = 1; Charlie<=5; Charlie++){
+				system.debug(Charlie+ ' - Na contagem');
+}
+	"Decremento"
+		Para remover 1 no valor de qualquer variável devemos usar das seguintes formas:
+
+			var = var – 1
+			ou
+			var--
+
+		Exemplo: usando loop de repetição, mostra os valores de 5 até 0.
+			for(integer Charlie = 1; Charlie<=5; Charlie++){
+				system.debug(Charlie+ ' - Na contagem');
+}
+
+*************************************************************************************************************************************************************
+"While"
+	Estrutura de repetição que possui suas diferenças com relação ao for.
+	Porém utiliza as mesmas estruturas que ela, mas em posições diferentes na sua estrutura.
+
+		/*Variaveis iniciais*/
+		while(/*condições para repetição*/){
+				/*comando que será repetido*/
+				/*incremento ou decremento*/
+}
+
+"Incremento"
+	integer charlie = 1;
+		while(charlie <= 5){
+			system.debug(charlie +' - na contagem');
+			charlie++;
+} 
+
+"Decremento" 
+	integer charlie = 5;
+		while(charlie >= 0){
+			system.debug(charlie +' - na contagem');
+			charlie--;
+} 
+
+*************************************************************************************************************************************************************
+Do-while
+	Essa estrutura de repetição é a "única" que 'executa os comandos internos' "pelo menos uma vez".
+	O for e while verificam a 'condição no início', o "do-while" 'entra', 'executa' e 'por último' "verifica a condição". Vamos entender a estrutura:
+
+	/*variaveis iniciais*/
+	do{
+		/*comando que será repetido*/
+		/*incremento ou decremento*/
+		while/*(condições para repetição);*/
+	}
+
+exemplo
+
+	integer charlie = 1;
+	do{
+		system.debug(charlie+ '- contagem');
+		charlie++;
+	}while(charlie <= 5);
+
+
+integer charlie = 5;
+	do{
+		system.debug(charlie+ '- contagem');
+		charlie--;
+	}while(charlie >= 0);
+
+*************************************************************************************************************************************************************
+
+
+Conversão de tipos de dados
+	Podemos 'converter' um "tipo de dado" "para outro" através da função "valueOf".
+	Exemplo, temos uma String com um valor 'numérico', podemos converter para 'inteiro', 'decimal' e 'etc'.
+	Precisamos dizer o "tipo que queremos converter" ‘ponto’ "valueOf" e d"entro do parênteses" o 'valor' ou 'variável' que "contém o valor a ser convertido"
+
+Exemplo	
+	string AnoNasc = '1996';
+	string NotaAv1 = '9.50';
+	string NotaAv2 = '9.50';
+	integer AnoAtual = Date.today().year();										//recupera o ano atual
+	integer AnoNascConvert = integer.valueOf(AnoNasc);							//convertendo string para inteiro
+	integer idade= anoAtual - AnoNascConvert;									//calculo idade
+		system.debug ('A idade do aluno é' + idade + ' anos.');											
+	decimal media = (decimal.valueOf(NotaAv1) + decimal.valueOf(NotaAv2))/2;	//convertendo string para decimal
+		system.debug('A média do aluno é: '+ media);
+	string status = media >= 6 ? 'APROVADO' : 'REPROVADO';						//operador ternario
+		system.debug('O aluno está ' + status);
+
+*************************************************************************************************************************************************************
+
+
+Tipo List
+Lists (arrays) são geralmente descritas como "lista de objetos";
+elas são basicamente 'objetos' que 'contêm múltiplos valores armazenados' em uma 'lista'.
+	Uma 'lista' pode ser "armazenada em variáveis" e ser 'tratado' de forma muito 'similar' a 'qualquer' outro tipo de 'valor',
+	a 'diferença' está em "podermos acessar" cada "valor" dentro da lista "individualmente" através de uma "posição específica".
+		'Cada valor' possui um 'índice' ('posição') específico. Geralmente iniciando a 'partir' do 0.
+
+posição 0, 1, 2, 3, 4,
+
+valor 	Brasil, Argentina, Paraguai, Chile, Peru
+
+A 'lista' acima possui 5 valores com posições de 0 a 4.
+
+O Apex nos permite 'armazenar' uma coleção do 'mesmo tipo de dados'. Seguindo a seguinte estrutura:
+	List<tipoDeDado> nomeLista = new List<tipoDeDado>{ valor1, valor2, valor3, …., valorN};
+
+		Para criar a 'lista' do exemplo acima, os valores são do tipo texto, logo são Strings. A estrutura será a seguinte:
+
+exemplo 1
+	list <String> paises = new list<String>{
+		'Brasil', 'Argentina', 'Paraguai', 'Chile', 'Peru'
+};
+			system.debug(paises);
+
+Podemos criar listas de formas diferentes:
+exemplo 2
+	definindo 'lista' por "notação de colchetes"
+		string[] cidade = new List<String>{
+			'Recife', 'Jaboatão dos Guararapes', 'Olinda'
+};
+				system.debug(cidade);
+
+exemplo 3
+	Definindo 'lista' por "quantidade de posições" e "atribuição de valor" por posição:
+		string[] cidades = new list<string>(3);
+			cidade[0] = 'Recife';
+			cidade[1] = 'Jaboatão dos Guararapes';
+			cidade[2] = 'Olinda';
+				system.debug(cidades);
+
+
+exemplo 4
+	Declarando por notação de array utilizando da "função add" para 'inserir elementos' na 'lista'
+		string[] bandas = new string[0];
+			bandas.add('Damião Experiença');
+			bandas.add('Banda só brega');
+			bandas.add('Reginaldo Rossi');
+			bandas.add('Infectos');
+			bandas.add('Kelvis Duran');
+			bandas.add('Priscila Senna');
+			bandas.add('Frankito Lopes o Indio Apaixonado');
+				system.debug(bandas);
+
+exemplo 5
+	"Acessando elementos da lista"
+		Podemos 'acessar' 'valores' individuais da 'lista' através da sua 'posição' ou da "função get".
+
+		string[] bandas = new string[0];
+			bandas.add('Damião Experiença');
+			bandas.add('Banda só brega');
+			bandas.add('Reginaldo Rossi');
+			bandas.add('Infectos');
+			bandas.add('Kelvis Duran');
+			bandas.add('Priscila Senna');
+			bandas.add('Frankito Lopes o Indio Apaixonado');
+				system.debug(bandas[2]); //	"através da posição" colocada "entre colchetes" poderemos acessar o valor da lista referente ao mesmo
+				system.debug(bandas.get(4)); // também podemos' buscar valores' na lista usando o "comando get" 
+				system.debug(bandas.get(5)); // inserindo uma posição "dentro dos parenteses"
+
+exemplo 6
+	"Função set"
+		Essa função é usada para 'alterar um valor' de uma 'determinada' 'posição' na 'lista'.
+		Exemplo: colocar 'swing do amor' na posição 'zero', ficaria da seguinte forma:
+
+		list<string> bandas =  new List<string>();
+			bandas.add('Damião Experiença');
+			bandas.add('Banda só brega');
+			bandas.add('Reginaldo Rossi');
+			bandas.add('Infectos');
+			bandas.add('Kelvis Duran');
+			bandas.add('Priscila Senna');
+			bandas.add('Frankito Lopes o Indio Apaixonado');
+				system.debug(bandas[0]);
+					bandas.set(0, 'Swing Do Amor');
+						system.debug(bandas[0]);
+
+exemplo 7
+	"Função remove"
+		Essa função 'remove' 'um elemento' da 'lista' através do index pré determinado.
+
+			list<string> bandas =  new List<string>();
+			bandas.add('Damião Experiença');
+			bandas.add('Banda só brega');
+			bandas.add('Reginaldo Rossi');
+			bandas.add('Infectos');
+			bandas.add('Kelvis Duran');
+			bandas.add('Priscila Senna');
+			bandas.add('Frankito Lopes o Indio Apaixonado');
+				system.debug(bandas);
+					bandas.remove(0);
+					bandas.remove(1);
+					bandas.remove(2);
+					bandas.remove(3);
+						system.debug(bandas);
+
+*************************************************************************************************************************************************************
+
+"Set datatype"
+	'Tipo Set'
+	O tipo set trabalha de maneira 'semelhante' a uma 'lista', porém de maneira 'não ordenada', logo não 'possui' "índice" ("posições"),
+	ela 'não permite' "valores duplicados".
+
+Vejamos a estrutura como fica:
+	Set<tipoDado> nomeList = new Set<tipoDado>{valor1, …., valorN};
+		Exemplo
+			set<string> bandas =  new set<string>{'Damião Experiença', 'Banda só brega', 'Reginaldo Rossi', 'Infectos', 'Kelvis Duran', 'Priscila Senna', 'Frankito Lopes o Indio Apaixonado'};
+				system.debug(bandas); // Note que no debug o resultado fica dentro de chaves em vez de parênteses como na List.
+
+"Função add"
+	Assim como na tipo List, você também pode 'adicionar' novos 'elementos' através da "função add". 'Porém', como dito antes,
+	'não é possível' inserir valores que 'já existem' dentro do Set.
+		set<string> bandas =  new set<string>();
+			bandas.add('Damião Experiença');
+			bandas.add('Banda só brega');
+			bandas.add('Reginaldo Rossi');
+			bandas.add('Infectos');
+			bandas.add('Kelvis Duran');
+			bandas.add('Priscila Senna');
+			bandas.add('Frankito Lopes o Indio Apaixonado');
+				system.debug(bandas);
+
+"Função remove"
+	Para remover um elemento do Set, em vez de usarmos o index como vimos na função de List,
+	devemos usar o comando remove(valorQueQueremosRemover).
+	Exemplo: vamos excluir algumas bandas.
+
+		set<string> bandas =  new set<string>{'Damião Experiença', 'Banda só brega', 'Reginaldo Rossi', 'Infectos', 'Kelvis Duran', 'Priscila Senna', 'Frankito Lopes o Indio Apaixonado'};
+				system.debug(bandas);
+					bandas.remove('Infectos');
+						system.debug(bandas);
+							bandas.remove('Damião Experiença');
+								system.debug(bandas);
+									bandas.remove('Banda só brega');
+										system.debug(bandas);
+
+"Função contains"
+	Para verificarmos se existe a ocorrência de um determinado valor, podemos usar a função contains.
+	Caso exista, ela retorna true. Exemplo:
+		set<string> bandas =  new set<string>{'Damião Experiença', 'Banda só brega', 'Reginaldo Rossi', 'Infectos', 'Kelvis Duran', 'Priscila Senna', 'Frankito Lopes o Indio Apaixonado'};
+			system.debug('Banda só brega? ' + bandas.Contains('Banda só brega'));
+			system.debug('Massacration? ' + bandas.Contains('Massacration'));
+
+"Função Size"
+	Size é uma função que 'retorna o tamanho' do 'conjunto de valores'.Podemos 'utilizar' essa função 'também' no tipo 'List'.
+		set<string> bandas =  new set<string>{'Damião Experiença', 'Banda só brega', 'Reginaldo Rossi', 'Infectos', 'Kelvis Duran', 'Priscila Senna', 'Frankito Lopes o Indio Apaixonado'};
+			system.debug('Tamanho do Set: ' + bandas.Size());
+				bandas.add('Massacration');
+					system.debug('Tamanho do Set: ' + bandas.Size());
+						bandas.add('Kassino');
+							system.debug('Tamanho do Set: ' + bandas.Size());
+								bandas.remove('Kassino');
+									system.debug('Tamanho do Set: ' + bandas.Size());
+
+
+*************************************************************************************************************************************************************
+
+"Tipo Map"
+	De maneira 'semelhante' aos tipos 'List' e 'Set', o 'Map' funciona com base no formato 'semelhante' ao "Object" do "javascript",
+	que é um 'conjunto de dados' baseado em "chave"("key") e "valor" ("value"). Cada chave 'possui' um 'valor' que poderá ser 'acessado a partir dela'.
+	O interessante é que o desenvolvedor precisa 'dizer' qual o 'tipo de dados' que a chave 'deve ser' e qual o 'tipo de dados' que os 'valores serão'.
+
+"Estrutura":
+	Map<tipoKey, tipoValue> nomeMap = new Map<tipoKey, tipoValue>();
+
+"Metodo put"
+	insere valores através dos parametros (key, value)
+		Map<integer, string> produtos = new Map<integer, string>();
+			produtos.put(1, 'Geladeira Furacão');
+			produtos.put(2, 'Havaiana de Pau');
+			produtos.put(3, 'Água em Pó Birigui');
+				system.debug(Produtos);
+
+	Podemos utilizar um String na key também:
+		Map<string, string> produtos = new Map<string, string>();
+			produtos.put('Alfa', 'Geladeira Furacão');
+			produtos.put('Bravo', 'Havaiana de Pau');
+			produtos.put('Charlie', 'Água em Pó Birigui');
+				system.debug(Produtos);
+"Função get":
+	Para 'trazer os valores' devemos utilizar a key (chave) como' referência' para 'recuperar o valor'. Através da função 'get'(key).
+		Map<string, string> produtos = new Map<string, string>();
+			produtos.put('Alfa', 'Geladeira Furacão');
+			produtos.put('Bravo', 'Havaiana de Pau');
+			produtos.put('Charlie', 'Água em Pó Birigui');
+				system.debug(Produtos);
+					system.debug(produtos.get('Alfa'));
+					system.debug(produtos.get('Charlie'));
+
+"Função keySet"
+	A função 'recupera' "todas as chaves" e as 'armazena' como um 'tipo' Set.
+		Map<string, string> produtos = new Map<string, string>();
+			produtos.put('Alfa', 'Geladeira Furacão');
+			produtos.put('Bravo', 'Havaiana de Pau');
+			produtos.put('Charlie', 'Água em Pó Birigui');
+				system.debug(produtos.keySet());
+"Função values":
+	A função 'recupera'" todos os valores" e os 'armazena' como um 'List'
+		Map<string, string> produtos = new Map<string, string>();
+			produtos.put('Alfa', 'Geladeira Furacão');
+			produtos.put('Bravo', 'Havaiana de Pau');
+			produtos.put('Charlie', 'Água em Pó Birigui');
+				system.debug(produtos.values());
+
+
+*************************************************************************************************************************************************************
